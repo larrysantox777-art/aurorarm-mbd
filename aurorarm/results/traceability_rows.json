@@ -1,0 +1,66 @@
+[
+ [
+  "REQ-CTRL-AA-001",
+  "erro nulo em regime (degrau)",
+  "MOD-CTRL: estado integrador z (src/refmodel.py: design, CtrlRef.step)",
+  "generated/aurora_ctrl.c:aurora_step (s->z, K_Z)",
+  "TST-CTRL-001 (sil_tests.py:req_tests step_sweep, MC)",
+  "erro final máx. 1.5e-06 rad (nominal); 6.2e-06 rad (MC ±10 %)"
+ ],
+ [
+  "REQ-CTRL-AA-002",
+  "sobressinal ≤ 8 %",
+  "MOD-CTRL: alocação de polos {-450, -60±j30, -100} s⁻¹ (discretizados a Ts=2 ms)",
+  "generated/aurora_ctrl.c:aurora_step (K_I,K_W,K_TH,K_Z)",
+  "TST-CTRL-002",
+  "nominal ≤ 2.28 % (1–15 rad); MC ±10 % ≤ 1.54 % (2–10 rad)"
+ ],
+ [
+  "REQ-CTRL-AA-003",
+  "acomodação ≤ 300 ms",
+  "MOD-CTRL (idem)",
+  "generated/aurora_ctrl.c:aurora_step",
+  "TST-CTRL-003",
+  "nominal ≤ 277 ms (≤15 rad); MC ≤ 234 ms"
+ ],
+ [
+  "REQ-CTRL-AA-004",
+  "|u| ≤ 48 V e |i| ≤ 8 A sempre",
+  "MOD-CTRL: saturação de tensão + limitador preditivo de corrente (ILIM=6 A) + anti-windup por retrocálculo",
+  "generated/aurora_ctrl.c:aurora_step (VMAX, ILIM, K_AW)",
+  "TST-CTRL-004",
+  "nominal |i| ≤ 6.08 A, |u| ≤ 14.4 V; MC: |i| ≤ 7.26 A, falhas 0/300"
+ ],
+ [
+  "REQ-SAFE-AA-001",
+  "mão < 500 mm ⇒ torque zero ≤ 100 ms",
+  "MOD-SUP: T1 (src/supervisor_spec.py) + modelo temporizado (src/verify_supervisor.py)",
+  "generated/aurora_ctrl.c:aurora_supervisor_step (case SUP_MOVING)",
+  "TST-VER-001 (exaustivo), TST-SWP-001 (504 comb. SIL), TST-SUP-001",
+  "modelo: pior caso 31 ms (tick 1 ms), analítico 34 ms; varredura SIL 33.75 ms; folga ≥ 66 ms"
+ ],
+ [
+  "REQ-SAFE-AA-002",
+  "sem retomada automática (exige rearme)",
+  "MOD-SUP: T4 só a partir de WAIT_REARM com rearm amostrado no mesmo ciclo",
+  "generated/aurora_ctrl.c:aurora_supervisor_step (case SUP_WAIT_REARM)",
+  "TST-VER-002, TST-SUP-002, TST-MUT-001",
+  "modelo: vale (17285 estados); 120 000 ciclos aleatórios sem violação; mutante 'rearme memorizado' reprovado"
+ ],
+ [
+  "REQ-SAFE-AA-003",
+  "mão removida + rearme ⇒ retoma trajetória original",
+  "MOD-SUP: T2/T4; MOD-CTRL: gerador de trajetória parte da posição atual rumo ao alvo r",
+  "generated/aurora_ctrl.c:aurora_supervisor_step + aurora_step (rl, v)",
+  "TST-VER-003 (vivacidade), TST-SUP-003, fig_collab",
+  "vivacidade: sem ciclo evitando MOVING; latência máx. 30 ms (15 ciclos); simulação retoma e atinge alvo"
+ ],
+ [
+  "REQ-SAFE-AA-004",
+  "v_efetuador ≤ 250 mm/s na zona colaborativa",
+  "MOD-CTRL: gerador (|v| ≤ 0,8·limite, |a| ≤ 500 rad/s²) + MOD-SUP: disparo por sobrevelocidade",
+  "generated/aurora_ctrl.c:aurora_step (RATEV, WOVER)",
+  "TST-SAFE-004",
+  "pico 200 mm/s (alavanca 0,35 m); sem disparo"
+ ]
+]

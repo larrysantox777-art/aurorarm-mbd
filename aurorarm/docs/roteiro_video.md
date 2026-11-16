@@ -1,0 +1,11 @@
+# Roteiro do vídeo (≤ 5 min) — apresentação à auditoria de segurança da Aurora Robótica
+
+Grave a tela (slides + terminal + figuras de `figs/`). Publicar no YouTube (não listado) e colar o link no fim do PDF.
+
+| Tempo | Mostrar | Fala (resumo) |
+|---|---|---|
+| 0:00–0:35 | slide do problema | Protótipo anterior: quase-acidente, torque não zerou porque o firmware manual não tratava a borda entre movimento e parada. Não havia evidência reprodutível. Hoje trago modelo, controle, verificação formal e código gerado com rastreabilidade. |
+| 0:35–1:40 | `fig_arch.png`, memorial (a)(b)(c) | Modelo de 2 estados (i, ω): autovalores −22,6 e −644,4 s⁻¹ → τm = 44,2 ms, τe = 1,55 ms (separação 28×); controlável e observável (posto 2). Ponto crítico: 3,735 A e **41,24 V**, folga 6,76 V (14 %) → anti-windup necessário. Ts = 2 ms = 22 amostras por τm. Controlador: realimentação de estados + integrador, polos {−450, −60±j30, −100}; `fig_step.png`: sobressinal ≤ 2,3 %, acomodação ≤ 277 ms, |i| ≤ 6,1 A. |
+| 1:40–3:00 | `fig_fsm.png`, terminal `verify_supervisor.py`, `fig_sweep.png` | Autômato de 3 estados. Prazo de 100 ms formalizado como "mão presente + torque ligado por > 100 ms é inalcançável". Atrasos: sensor 0–20 ms, ciclo perdido, fase do ciclo, decaimento da corrente (10 ms). Verificação exaustiva: pior caso 31 ms (limite analítico 34 ms), folga ≥ 66 ms. **Contraexemplo** da versão preliminar (detecção por borda): mostrar a trilha de 7 passos. Versão corrigida: propriedade vale; vivacidade vale (máx. 30 ms). |
+| 3:00–4:15 | `aurora_ctrl.h` (bloco de rastreabilidade), saída de `sil.py`, tabela da matriz | Código C gerado do modelo. SIL: erro **0** contra o modelo float32 (bit-a-bit) e ≤ 22,5·ε·Σ|termos| contra float64; cobertura gcov 98,3 % das linhas (só o `default` defensivo não executa), 100 % de estados/transições do supervisor. Matriz: 8 requisitos → modelo → código → teste. |
+| 4:15–5:00 | slide "honestidade técnica" | Sustenta: evidência reprodutível, verificação exaustiva sob as hipóteses declaradas. **Não** sustenta certificação: faltam qualificação do gerador/compilador, independência de verificação, WCET e HIL no alvo, análise de falhas de hardware, alocação SIL/PL (IEC 61508 / ISO 26262), dados reais de bancada. |

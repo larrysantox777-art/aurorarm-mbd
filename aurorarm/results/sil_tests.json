@@ -1,0 +1,184 @@
+{
+ "transition_tests": {
+  "n_tests": 36,
+  "n_pass": 36,
+  "abstract_states": 9,
+  "abstract_edges": 36,
+  "state_cov_pct": 100.0,
+  "trans_cov_pct": 100.0
+ },
+ "properties": {
+  "cycles": 120000,
+  "violations": {},
+  "passed": true
+ },
+ "requirements": {
+  "step_sweep": [
+   {
+    "amp_motor_rad": 1,
+    "amp_joint_deg": 0.5729577951308232,
+    "overshoot_pct": 0.0846073153092819,
+    "settling_s": 0.10440000000000002,
+    "ess": 2.040480647780285e-07,
+    "imax": 6.078093893206226,
+    "umax": 6.0164794921875,
+    "ok_os": true,
+    "ok_ts": true,
+    "ok_ess": true,
+    "ok_u": true,
+    "ok_i": true
+   },
+   {
+    "amp_motor_rad": 2,
+    "amp_joint_deg": 1.1459155902616465,
+    "overshoot_pct": 0.06807953995890959,
+    "settling_s": 0.12140000000000002,
+    "ess": 2.905771201433538e-07,
+    "imax": 6.07809870718084,
+    "umax": 7.176719665527344,
+    "ok_os": true,
+    "ok_ts": true,
+    "ok_ess": true,
+    "ok_u": true,
+    "ok_i": true
+   },
+   {
+    "amp_motor_rad": 5,
+    "amp_joint_deg": 2.8647889756541165,
+    "overshoot_pct": 0.048453873670055714,
+    "settling_s": 0.1612,
+    "ess": 7.133645167911595e-07,
+    "imax": 6.078109665506524,
+    "umax": 9.605006217956543,
+    "ok_os": true,
+    "ok_ts": true,
+    "ok_ess": true,
+    "ok_u": true,
+    "ok_i": true
+   },
+   {
+    "amp_motor_rad": 10,
+    "amp_joint_deg": 5.729577951308233,
+    "overshoot_pct": 0.10192549086040614,
+    "settling_s": 0.2068,
+    "ess": 1.4647733426187415e-06,
+    "imax": 6.078109665506524,
+    "umax": 12.290685653686523,
+    "ok_os": true,
+    "ok_ts": true,
+    "ok_ess": true,
+    "ok_u": true,
+    "ok_i": true
+   },
+   {
+    "amp_motor_rad": 15,
+    "amp_joint_deg": 8.594366926962348,
+    "overshoot_pct": 2.282388213599885,
+    "settling_s": 0.2774,
+    "ess": 3.7338609537584944e-07,
+    "imax": 6.078109665506524,
+    "umax": 14.36773681640625,
+    "ok_os": true,
+    "ok_ts": true,
+    "ok_ess": true,
+    "ok_u": true,
+    "ok_i": true
+   }
+  ],
+  "step5_noload": {
+   "overshoot_pct": 3.8782329879117583,
+   "settling_s": 0.16360000000000002,
+   "ess": 1.9223421787728512e-07,
+   "imax": 6.042663938455777,
+   "umax": 10.38967227935791
+  },
+  "monte_carlo": {
+   "n": 300,
+   "max_os": 1.543585548501465,
+   "max_ts": 0.23420000000000002,
+   "max_ess": 6.181955990669508e-06,
+   "max_imax": 7.260874122972422,
+   "max_umax": 13.127737045288086,
+   "n_fail_os": 0,
+   "n_fail_ts": 0,
+   "n_fail_i": 0,
+   "n_fail_u": 0
+  },
+  "no_antiwindup": [
+   {
+    "amp": 5,
+    "os_no_aw": 126.34988086553291,
+    "ts_no_aw": 1.002,
+    "imax": 6.0807054022353455
+   },
+   {
+    "amp": 10,
+    "os_no_aw": 169.26472764275388,
+    "ts_no_aw": 1.002,
+    "imax": 6.08289590611666
+   },
+   {
+    "amp": 15,
+    "os_no_aw": 186.55271178241847,
+    "ts_no_aw": 1.002,
+    "imax": 6.084442879694367
+   }
+  ],
+  "tip_speed": [
+   {
+    "step": 5,
+    "w_peak_motor": 42.56496702976159,
+    "v_tip_mm_s": 148.97738460416556,
+    "tripped": false
+   },
+   {
+    "step": 10,
+    "w_peak_motor": 56.77058352296341,
+    "v_tip_mm_s": 198.69704233037194,
+    "tripped": false
+   },
+   {
+    "step": 30,
+    "w_peak_motor": 57.16189330044184,
+    "v_tip_mm_s": 200.06662655154642,
+    "tripped": false
+   },
+   {
+    "step": 60,
+    "w_peak_motor": 57.16189330044184,
+    "v_tip_mm_s": 200.06662655154642,
+    "tripped": false
+   }
+  ],
+  "cruise450": {
+   "w_final": 450.0001608554181,
+   "i_final": 3.731953234372606,
+   "u_final": 41.234375,
+   "umax": 41.6845703125,
+   "imax": 5.200447532602298,
+   "track_err_final": 18.402454662127866,
+   "i_peak": 5.200447532602298,
+   "w_peak": 450.01304659194
+  }
+ },
+ "latency_c": {
+  "n": 30,
+  "worst_ms": 33.0
+ },
+ "mutation": {
+  "v0_edge": {
+   "property_violations": {
+    "SAFE-001": 1453
+   },
+   "detected_by_properties": true,
+   "detected_by_directed": true
+  },
+  "v0_stale_rearm": {
+   "property_violations": {
+    "SAFE-002": 941
+   },
+   "detected_by_properties": true,
+   "detected_by_directed": false
+  }
+ }
+}
